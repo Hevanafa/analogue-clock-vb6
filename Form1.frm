@@ -221,21 +221,30 @@ pbClock.Circle (cx, cy), 2, 2, vbBlack
 End Sub
 
 
+Function GetDayOfWeek%()
+
+GetDayOfWeek = DatePart("w", Now)
+
+End Function
+
+
 Function GetDayOfWeekAbbr$()
 
 GetDayOfWeekAbbr = Format(DatePart("w", Now), "ddd")
 
 End Function
 
+
+
 Sub RefreshDayDisplay()
 
 If LastDay <> Day(Now) Then
     LastDay = Day(Now)
-    lblDayOfWeek.Caption = GetDayOfWeekAbbr
+    lblDayOfWeek.Caption = Str(GetDayOfWeek)
     lblDayOfWeek.Visible = False
 End If
 
-pbClock.ForeColor = IIf(GetDayOfWeekAbbr = "Sun", vbRed, vbBlack)
+pbClock.ForeColor = IIf(GetDayOfWeek = vbSunday, vbRed, vbBlack)
 pbClock.CurrentX = (ClockWidth - lblDayOfWeek.Width) \ 2
 pbClock.CurrentY = ClockHeight \ 2 + 20
 
